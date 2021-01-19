@@ -4,24 +4,23 @@ import {
   MatFormFieldModule,
   MAT_FORM_FIELD_DEFAULT_OPTIONS
 } from "@angular/material/form-field";
-import { CnioAutocomplete } from "./cnio-autocomplete-component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { MatInputModule } from "@angular/material/input";
+import { CnioAutocomplete } from "./cnio-autocomplete-component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatInputModule
   ],
   exports: [
     CnioAutocomplete,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
-    MatAutocompleteModule
+
   ],
   declarations: [CnioAutocomplete],
   providers: [

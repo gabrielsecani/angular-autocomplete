@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
+import { Options } from "src/cnio-autocomplete/cnio-autocomplete-component";
 
 export interface User {
   id: number;
@@ -17,6 +18,16 @@ export interface User {
   styleUrls: ["autocomplete-display-example.css"]
 })
 export class AutocompleteDisplayExample implements OnInit {
+
+  cniooptions: Options = {
+    label: "meu auto complete",
+    options: [
+      { id: 1, name: "Mary" },
+      { id: 2, name: "Shelley" },
+      { id: 3, name: "Igor" }
+    ]
+  };
+
   myControl = new FormControl();
   options: User[] = [
     { id: 1, name: "Mary" },

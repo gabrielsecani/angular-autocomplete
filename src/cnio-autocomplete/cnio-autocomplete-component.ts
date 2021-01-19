@@ -10,6 +10,7 @@ export interface Option {
 }
 export interface Options {
   options: Option[];
+  label: string;
   displayFn?: ((value: any) => string) | null;
   filter?: ((value: Option[], filterText: string) => Option[]) | null;
 }
@@ -26,10 +27,10 @@ export class CnioAutocomplete implements OnInit {
   myControl = new FormControl();
   @Input()
   options: Options = {
+    label: "Label for autocomplete",
     options: [
-      { id: 1, name: "Mary" },
-      { id: 2, name: "Shelley" },
-      { id: 3, name: "Igor" }
+      { id: 1, name: "Default Opt 1" },
+      { id: 2, name: "Default Opt 2" }
     ]
   };
 

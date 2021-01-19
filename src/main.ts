@@ -14,7 +14,6 @@ import {AutocompleteDisplayExample} from './app/autocomplete-display-example';
 
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
-// This makes the examples that use MatFormField render the same in StackBlitz as on the docs site.
 @NgModule({
   imports: [
     BrowserModule,
