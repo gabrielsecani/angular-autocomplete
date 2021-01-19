@@ -1,0 +1,12 @@
+<form class="select-form">
+	<mat-form-field class="select-full-width">
+		<mat-label>Tipo de poder</mat-label>
+		<input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+			<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+				{{option.name}}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+	selected value: {{myControl.value&& myControl.value.name }}
+</form>
