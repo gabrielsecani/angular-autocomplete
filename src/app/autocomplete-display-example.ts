@@ -20,6 +20,7 @@ export interface User {
 export class AutocompleteDisplayExample implements OnInit {
 
   cnioValue: Option = { id: 0, name: '' };
+  cnioValue2: Option = { id: 0, name: '' };
   cniooptions: Options = {
     label: "meu auto complete",
     options: [
@@ -27,12 +28,6 @@ export class AutocompleteDisplayExample implements OnInit {
       { id: 2, name: "Shelley" },
       { id: 3, name: "Igor" }
     ],
-    filter: (options, name) => {
-      const filterValue = name.toLowerCase();
-      return options.filter(
-        option => option.name.toLowerCase().indexOf(filterValue) === 0
-      );
-    }
   };
 
   myControl = new FormControl();

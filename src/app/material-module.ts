@@ -42,12 +42,14 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
 import { CnioAutocompleteModule } from "../cnio-autocomplete/cnio-autocomplete-module";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [CnioAutocompleteModule],
 
   exports: [
     CnioAutocompleteModule,
+    FormsModule,
     // A11yModule,
     // ClipboardModule,
     // CdkStepperModule,

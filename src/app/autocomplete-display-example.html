@@ -1,4 +1,4 @@
-<form class="example-form">
+<!-- <form class="example-form">
 	<mat-form-field class="example-full-width">
 		<mat-label>Tipo de poder</mat-label>
 		<input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
@@ -9,9 +9,14 @@
 		</mat-autocomplete>
 	</mat-form-field>
 	{{myControl.value&& myControl.value.name }}
-</form>
-kct
+</form> -->
+
 <cnio-autocomplete [options]="cniooptions" [(selected)]="cnioValue"></cnio-autocomplete>
 
 selected outside: {{ cnioValue | json }}
+
+
+<cnio-autocomplete [options]="cniooptions" [(selected)]="cnioValue2"></cnio-autocomplete>
+
+selected outside: {{ cnioValue2 | json }}
 

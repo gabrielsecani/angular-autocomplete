@@ -1,12 +1,28 @@
 <form class="select-form">
-	<mat-form-field class="select-full-width" (click)="resetFiltered('click externo')">
+	<mat-form-field class="select-full-width">
 		<mat-label>{{options.label}}</mat-label>
-		<input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" >
-		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="optionSelected($event)" (click)="resetFiltered('click')" (focus)="resetFiltered('focus')" (blur)="backFiltered()">
+		<input tab-directive type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption="true">
 			<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 				{{option.name}}
 			</mat-option>
 		</mat-autocomplete>
+		<mat-error *ngIf="myControl.errors?.required">
+			Campo obrigatorio
+		</mat-error>
+		<mat-error *ngIf="myControl.hasError('forbiddenNames')">
+			Voce deve selecionar uma opção da lista.
+			<strong>'{{myControl.errors?.forbiddenNames?.value}}'</strong> não é aceito.
+		</mat-error>
 	</mat-form-field>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	selected value: {{myControl.value | json }}
 </form>

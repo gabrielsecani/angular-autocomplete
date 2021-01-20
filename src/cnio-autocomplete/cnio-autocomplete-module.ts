@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
 import { CnioAutocomplete } from "./cnio-autocomplete-component";
+import { TabDirective } from "./tab-directive";
 
 @NgModule({
   imports: [
@@ -19,10 +20,9 @@ import { CnioAutocomplete } from "./cnio-autocomplete-component";
   ],
   exports: [
     CnioAutocomplete,
-    MatFormFieldModule,
-
+    MatFormFieldModule
   ],
-  declarations: [CnioAutocomplete],
+  declarations: [CnioAutocomplete, TabDirective],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -30,4 +30,4 @@ import { CnioAutocomplete } from "./cnio-autocomplete-component";
     }
   ]
 })
-export class CnioAutocompleteModule {}
+export class CnioAutocompleteModule { }
