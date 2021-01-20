@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
-import { Options } from "src/cnio-autocomplete/cnio-autocomplete-component";
+import { Option, Options } from "src/cnio-autocomplete/cnio-autocomplete-component";
 
 export interface User {
   id: number;
@@ -19,13 +19,20 @@ export interface User {
 })
 export class AutocompleteDisplayExample implements OnInit {
 
+  cnioValue: Option = { id: 0, name: '' };
   cniooptions: Options = {
     label: "meu auto complete",
     options: [
       { id: 1, name: "Mary" },
       { id: 2, name: "Shelley" },
       { id: 3, name: "Igor" }
-    ]
+    ],
+    filter: (options, name) => {
+      const filterValue = name.toLowerCase();
+      return options.filter(
+        option => option.name.toLowerCase().indexOf(filterValue) === 0
+      );
+    }
   };
 
   myControl = new FormControl();
@@ -45,7 +52,7 @@ export class AutocompleteDisplayExample implements OnInit {
   }
 
   displayFn(user: User): string {
-    console.log(user.name);
+    console.log(user);
     return user && user.name ? user.id + user.name : "";
   }
 
@@ -56,7 +63,3 @@ export class AutocompleteDisplayExample implements OnInit {
     );
   }
 }
-
-/**  Copyright 2020 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license */

@@ -1,5 +1,7 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { MatOption } from "@angular/material/core";
 import { Observable } from "rxjs";
 import { isFunction } from "rxjs/internal-compatibility";
 import { map, startWith } from "rxjs/operators";
@@ -11,7 +13,6 @@ export interface Option {
 export interface Options {
   options: Option[];
   label: string;
-  displayFn?: ((value: any) => string) | null;
   filter?: ((value: Option[], filterText: string) => Option[]) | null;
 }
 
@@ -37,27 +38,46 @@ export class CnioAutocomplete implements OnInit {
   /**
    * id of Option or whole Option
    */
-  @Input()
-  value: Option;
-  @Output()
-  valueChanged: Option;
+  @Input() selected: Option | string;
+  @Output() selectedChange = new EventEmitter<Option>();
 
   filteredOptions: Observable<Option[]>;
+  prevFilter = "§";
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(""),
-      map(value =>
-        typeof value === "string" ? this.value || value : value.name
-      ),
+      map(value => typeof value === "string" ? value : value.name),
       map(name => (name ? this._filter(name) : this.options.options))
     );
   }
 
-  displayFn(opts: Option): string {
-    if (isFunction(this.options.displayFn)) {
-      return this.options.displayFn(opts);
+  resetFiltered(origem: string) {
+    console.log('reset antes', origem, this.myControl.value, this.prevFilter);
+    if (this.myControl.value && this.prevFilter === "§") {
+      console.log('reset guardando valor');
+      this.prevFilter = this.myControl.value;
+      this.myControl.setValue("");
     }
+    console.log('reset depois', origem, this.myControl.value, this.prevFilter);
+  }
+  backFiltered() {
+    console.log('back antes', this.myControl.value, this.prevFilter);
+    if (this.myControl.value === "" && this.prevFilter !== "§") {
+      console.log('voltando guardando valor');
+      this.myControl.setValue(this.prevFilter);
+      this.prevFilter = "§";
+    }
+    console.log('back depois', this.myControl.value, this.prevFilter);
+  }
+
+  optionSelected(event: MatAutocompleteSelectedEvent) {
+    console.log(event);
+    this.prevFilter = "§";
+    this.selectedChange.emit(event.option.value);
+  }
+
+  displayFn(opts: Option): string {
     return opts && opts.name ? opts.name : "";
   }
 
@@ -70,4 +90,5 @@ export class CnioAutocomplete implements OnInit {
       option => option.name.toLowerCase().indexOf(filterValue) === 0
     );
   }
+
 }
