@@ -18,10 +18,7 @@ import { TabDirective } from "./tab-directive";
     MatAutocompleteModule,
     MatInputModule
   ],
-  exports: [
-    CnioAutocomplete,
-    MatFormFieldModule
-  ],
+  exports: [CnioAutocomplete, MatFormFieldModule],
   declarations: [CnioAutocomplete, TabDirective],
   providers: [
     {
@@ -30,4 +27,4 @@ import { TabDirective } from "./tab-directive";
     }
   ]
 })
-export class CnioAutocompleteModule { }
+export class CnioAutocompleteModule {}
