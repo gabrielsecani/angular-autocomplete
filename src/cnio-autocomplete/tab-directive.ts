@@ -46,22 +46,22 @@ export class TabDirective implements AfterViewInit, OnDestroy {
     @HostListener('blur')
     handleBlur() {
         console.log('blur preview', this.preview, 'value', this.control.control?.value);
-        // if (this.preview && typeof this.preview === 'object' && typeof this.control.control?.value !== 'object') {
+        if (this.preview && typeof this.preview === 'object' && typeof this.control.control?.value !== 'object') {
         //     console.log('blur voltando valor', this.preview)
-        //     const value = this.preview;
-        //     this.preview=null;
-        //     this.control.control?.setValue(value, { emit: true });
-        //     this.autoTrigger.writeValue(value);
-        // }
+            const value = this.preview;
+            this.preview=null;
+            this.control.control?.setValue(value, { emit: true });
+            this.autoTrigger.writeValue(value);
+        }
     }
 
     @HostListener('click')
     handleClick() {
         console.log('click control.value', this.control.control?.value, 'preview', this.preview, 'typeof', typeof this.preview);
-        // if (this.preview && typeof this.preview === 'object') {
-        //     console.log('focus limpando filtro, valor anterior', this.preview)
-        //     this.control.control?.setValue('', { emit: true });
-        // }
+        if (this.preview && typeof this.preview === 'object' && typeof this.control.control?.value == 'object') {
+            // console.log('focus limpando filtro, valor anterior', this.preview)
+            this.control.control?.setValue('', { emit: true });
+        }
     }
 
 }

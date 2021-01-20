@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from "@angular/core";
-import { ValidatorFn } from "@angular/forms";
+import { ValidatorFn, Validators } from "@angular/forms";
 import { AbstractControl } from "@angular/forms";
 import { FormControl } from "@angular/forms";
-import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
 import { Observable } from "rxjs";
 import { isFunction } from "rxjs/internal-compatibility";
 import { filter, map, startWith } from "rxjs/operators";
@@ -43,8 +42,9 @@ export class CnioAutocomplete implements OnInit, OnDestroy {
   /**
    * id of Option or whole Option
    */
-  @Input() selected: Option | string='';
+  @Input() selected: Option | string = '';
   @Output() selectedChange = new EventEmitter<Option>();
+  @Input() required = false;
 
   @Input()
   options: Options = {
@@ -56,16 +56,23 @@ export class CnioAutocomplete implements OnInit, OnDestroy {
   };
 
   myControl = new FormControl(null, [
-    //Validators.required,
+    this.requiredValidator(),
     this.forbiddenNamesValidator()
   ]);
   observable: any;
+
+  requiredValidator(): ValidatorFn {
+    if (this.required) {
+      return Validators.required
+    }
+    return () => null;
+  }
 
   forbiddenNamesValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       if (!control.value) return null;
       const index = this.options.options.findIndex(service => {
-        return new RegExp("^" + service.name + "$||^" + service.id + "$").test(control.value?.name || control.value);
+        return new RegExp("^" + service.name + "$|^" + service.id + "$").test(control.value?.name || control.value);
       });
       return index < 0 ? { forbiddenNames: { value: control.value?.name || control.value } } : null;
     };

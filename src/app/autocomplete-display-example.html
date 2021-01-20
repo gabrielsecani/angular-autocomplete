@@ -11,7 +11,7 @@
 	{{myControl.value&& myControl.value.name }}
 </form> -->
 
-<cnio-autocomplete [options]="cniooptions" [(selected)]="cnioValue"></cnio-autocomplete>
+<cnio-autocomplete [required]="true" [options]="cniooptions" [(selected)]="cnioValue"></cnio-autocomplete>
 
 selected outside: {{ cnioValue | json }}
 
