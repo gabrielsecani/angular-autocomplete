@@ -1,22 +1,5 @@
-<!-- <form class="example-form">
-	<mat-form-field class="example-full-width">
-		<mat-label>Tipo de poder</mat-label>
-		<input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-			<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-				{{option.name}}
-			</mat-option>
-		</mat-autocomplete>
-	</mat-form-field>
-	{{myControl.value&& myControl.value.name }}
-</form> -->
-
-<cnio-autocomplete [required]="true" [options]="cniooptions" [(selected)]="cnioValue"></cnio-autocomplete>
+<cnio-autocomplete [required]="true" [options]="cniooptions"  [(selected)]="cnioValue"></cnio-autocomplete>
 
 selected outside: {{ cnioValue | json }}
 
-
-<cnio-autocomplete [options]="cniooptions" [(selected)]="cnioValue2"></cnio-autocomplete>
-
-selected outside: {{ cnioValue2 | json }}
 

@@ -2,7 +2,7 @@
 	<mat-form-field class="select-full-width">
 		<mat-label>{{options.label}}</mat-label>
 		<input tab-directive type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption="true">
+		<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption="true" >
 			<mat-option *ngFor="let option of filteredOptions | async" [value]="option">
 				{{option.name}}
 			</mat-option>
@@ -17,12 +17,6 @@
 	</mat-form-field>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+
 	selected value: {{myControl.value | json }}
 </form>

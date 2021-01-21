@@ -86,9 +86,12 @@ export class CnioAutocomplete implements OnInit, OnDestroy {
       map(value => typeof value === "string" ? value : value.name),
       map(name => (name ? this._filter(name) : this.options.options))
     );
+
     this.observable = this.myControl.valueChanges
-      .pipe(filter(value => value === "" || typeof value === 'object'))
-      .subscribe(value => this.selectedChange.emit(value));
+    .pipe(filter(value => value === "" || typeof value === 'object'))
+    .subscribe(value => this.selectedChange.emit(value));
+
+    this._setDefaultValue()
   }
   ngOnDestroy() {
     this.observable.unsubscribe();
@@ -103,6 +106,18 @@ export class CnioAutocomplete implements OnInit, OnDestroy {
       return this.options.filter(this.options.options, name);
     }
     return filterContains(this.options.options, name);
+  }
+
+  private _setDefaultValue() {
+    if (this.selected && typeof this.selected === "string" ){
+      const selected = this._filter(this.selected);
+      if(selected && selected.length > 0 ){
+        this.myControl.setValue(selected[0]);
+      }
+    }
+    else if (this.selected && typeof this.selected === "object" ){
+        this.myControl.setValue(this.selected);
+    }
   }
 
 }
